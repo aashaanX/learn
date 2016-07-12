@@ -1,0 +1,48 @@
+# Python program for Knight tour problem
+
+N = 8
+
+def isSafe(x,y,sol):
+	# function to check x and y are valid indexes of board
+	print(x,y,sol[x][y])
+	return (x>=0 and x<N and y>=0 and y<N and sol[x][y] == -1)
+
+def printSolution(sol):
+	# function to print solution matrix
+	for i in sol:
+		string = ''
+		for j in i:
+			string = string+str(j)
+		print(string)
+def solveKTUtil(x,y,movei,sol,xMove,yMove):
+	if (movei==N*N):
+		 return True
+	for k in range(8):
+		next_x=x+xMove[k]
+		next_y=y+yMove[k]
+		if isSafe(next_x,next_y,sol):
+			sol[next_x][next_y] = movei
+			if solveKTU(next_x,next_y,movei+1,sol,xMove,yMove):
+				return True
+			else:
+				sol[next_x][next_y] = -1
+	return False
+	
+def solveKT():
+	sol =[[-1 for i in range(8)] for j in range(8)]
+	xMove = [2,1,2,1,-2,-1,-1,-2]
+	yMove = [1,2,-1,-2,1,2,-2,-1]
+	
+	sol[0][0] = 0
+	
+	if(not(solveKTUtil(0,0,1,sol,xMove,yMove))):
+		print("Solution Doesn't Exist")
+		printSolution(sol)
+		return False
+	else:
+		printSolution(sol)
+	return True
+
+if __name__ == "__main__":
+	solveKT()
+
