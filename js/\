@@ -1,0 +1,60 @@
+
+// Recursion
+
+// hanoi tower
+
+var hanoi = function hanoi(disc,src,aux,dst){
+	if (disc>0){
+		hanoi(disc-1,src,dst,aux);
+		document.writeln('Move disc '+disc+' from '+src+' to '+dst);
+		hanoi(disc-1,aux,src,dst);
+		}
+	};
+
+hanoi(4,'src','aux','dst');
+
+// DOM
+
+var walk_the_DOM = function walk(node,func){
+	func(node);
+	node = node.firstChild;
+	while (node){
+		walk(node,func);
+		node = node.nextSibling;
+		}
+	};
+/*
+walk_the_DOM(<body>,print(node){
+	document.writeln(node);
+	};)
+*/
+
+var getElememtByAttribute = function(att,value){
+	var results = [];
+	walk_the_DOM(document.body,function (node){
+		var actual = node.nodeType === 1 && node.getAttribute(att);
+		if (typeof actual === 'string' && (actual === value|| typeof value !== 'string')){
+			results.push(node);
+			}
+		});
+	return results;
+	};
+//document.writeln(getElementByAttribute("class");
+//document.writeln(getAttribute("class");
+
+
+//Scope
+
+var foo = function(){
+	var a=3,b=5;
+	var bar = function(){
+		var b=7,c = 11;
+		a+=b+c;
+		document.writeln("a="+a+" b="+b+" c="+c);
+	};
+	document.writeln("a="+a+" b="+b+" c="+c);
+	bar();
+	document.writeln("a="+a+" b="+b+" c="+c);
+
+};
+foo();

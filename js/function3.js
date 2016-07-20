@@ -91,7 +91,7 @@ var fade = function(node){
 	var level = 1;
 	var step = function(){
 		var hex = level.toString(16);
-		node.style.backgroundColor = '#FFFF' + hex + hex;
+		node.style.backgroundColor = '#FF00' + hex+hex;
 		if (level<15){
 			level +=1;
 			setTimeout(step,100);
@@ -101,3 +101,20 @@ var fade = function(node){
 };
 
 fade(document.body);
+
+// function that assign event handler function to an array of nodes
+
+var add_the_handlers = function (nodes){
+	var helper = function (i) {
+		return function(e) {
+			alert(i);
+		};
+	};
+	var i;
+	for (i=0;i<nodes.length;i+=1){
+		nodes[i].onclick = helper(i);
+	}
+};
+
+
+
